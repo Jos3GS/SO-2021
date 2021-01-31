@@ -1,0 +1,12 @@
+Materia: Sociales
+Nota: 4.5
+Creditos: 3
+Materia: Matematicas
+Nota: 4.0
+Creditos: 2
+Materia: Ingles
+Nota: 5
+Creditos: 3
+Materia: Español
+Nota: 2
+Creditos: 1
