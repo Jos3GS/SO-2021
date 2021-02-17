@@ -4,7 +4,7 @@ int N1=0,N2=0,NR=0, a=0;
 char key;
 
 void arrayCommon(int* ArrA, int N1, int* ArrB, int N2, int* ArrRE, int NR){
-    int aux=0;
+    int aux=-1;
     for(int i=0; i<N1;i++){
         for(int j=0; j<N2; j++){
             if(ArrA[i]==ArrB[j]){
@@ -13,6 +13,7 @@ void arrayCommon(int* ArrA, int N1, int* ArrB, int N2, int* ArrRE, int NR){
                         if(ArrA[i]!=ArrRE[k]){
                             ArrRE[k] = ArrA[i];
                             aux++;
+                            break;
                         }
                     }
                 }
@@ -20,8 +21,8 @@ void arrayCommon(int* ArrA, int N1, int* ArrB, int N2, int* ArrRE, int NR){
         }
     }
 
-    printf("Se encontraron %d Elementos en comun\n",aux);
-    for(int i=0;i<aux;i++){
+    printf("Se encontraron %d Elementos en comun\n",aux+1);
+    for(int i=0;i<aux+1;i++){
         printf(" %d ",ArrRE[i]);
     }
     printf("\n");
@@ -62,7 +63,7 @@ int main (void){
         ArrayB[i] = a;
     }
 
-    if(N1 > N2){
+    if(N1 < N2){
         NR = N1;
     }else{
         NR = N2;
