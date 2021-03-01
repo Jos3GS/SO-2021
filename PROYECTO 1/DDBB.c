@@ -41,7 +41,7 @@ struct Student *loadbd(FILE *Archivo, struct Student *espaciobd, int *tamanobd, 
     fscanf(Archivo, "%s", etp);
     fscanf(Archivo,"%d", tamanobd);
     fgets(lnAnt, "%[^\n]", Archivo);
-    fgets(lnAnt,"%[^\n]",Archivo);
+    //fgets(lnAnt,"%[^\n]",Archivo);
 
     while(1){
         fgets(ln,"%[^\n]",Archivo);
@@ -56,14 +56,14 @@ struct Student *loadbd(FILE *Archivo, struct Student *espaciobd, int *tamanobd, 
     printf("%d\n",contRegistro);
     espaciobd = mkdb(Nombre, *tamanobd);
     rewind(Archivo);
-    fgets(lnAnt, "%[^\n]", Archivo);
+    fgets(lnAnt,"%[^\n]",Archivo);
     fgets(lnAnt,"%[^\n]",Archivo);
     for(int i=0; i < contRegistro; i++){
         fscanf(Archivo, "%s", nameStudent);
         fscanf(Archivo,"%d", &CC);
         fscanf (Archivo, "%d", &Semestre);
         strcpy((espaciobd + i)-> Nombre,nameStudent);
-        (espaciobd +i)-> CC = CC;
+        (espaciobd + i)-> CC = CC;
         (espaciobd + i)->Semestre = Semestre;
     }
     return espaciobd;
@@ -110,7 +110,7 @@ int main(int argc, char const *argv[]){
     struct Student *espaciobd;
     
     do{
-        printf("Ingrese un Comando\n");
+        printf("-->  ");
         fscanf(stdin,"%s", command);
         getc(stdin);
         if(strncmp("mkdb",command,4)==0){
