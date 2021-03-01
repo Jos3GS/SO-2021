@@ -161,7 +161,7 @@ int main(int argc, char const *argv[]){
                 scanf("%s", Nombre);
                 getc(stdin);
                 FILE *Archivo = fopen(Nombre, "w+");
-                savebd(Archivo, espaciobd, Nombre,tamannobd,contRegistros);
+                savebd(Archivo, espaciobd, Nombre,tamannobd,contRegistro);
                 fclose(Archivo);
             }
             break;
