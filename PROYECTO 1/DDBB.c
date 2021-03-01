@@ -66,6 +66,23 @@ struct Student *loadbd(FILE *Archivo, struct Student *espaciobd, int *tamanobd, 
         (espaciobd +i)-> CC = CC;
         (espaciobd + i )->Semestre = Semestre;
     }
-    return espaciobd
+    return espaciobd;
+}
+
+void readall(struct Student *bd, int tamannobd){
+    for( int i=0; i < tamannobd; i++){
+        printf("%s\n", (bd + i)-> Nombre);
+        printf("%d\n", (bd + i)-> CC);
+        printf("%d\n", (bd + i)-> Semestre);
+    }
+}
+
+void readsize(struct Student *bd, int tamannobd){
+    for(int i=0; i>tamannobd; i++){
+        if((bd + i)->CC==0){
+            printf("La BBDD tiene: %d Registros de %d Diponibles\n",i,tamannobd);
+            break;
+        }
+    }
 }
 
