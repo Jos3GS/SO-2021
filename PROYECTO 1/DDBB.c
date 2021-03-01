@@ -45,7 +45,7 @@ struct Student *loadbd(FILE *Archivo, struct Student *espaciobd, int *tamanobd, 
 
     while(1){
         fgets(ln,"%[^\n]",Archivo);
-        if(strcmp(lnAnt, ln) == 0){
+        if(strncmp(lnAnt, ln, 50) == 0){
             break;
         }
         printf("%s\n",ln);
@@ -103,7 +103,71 @@ void readreg(struct Student *bd, int tamannobd, int CC){
     }
 }
 
-int main(int argc, char const *argv[]{
+int main(int argc, char const *argv[]){
+    int contRegistro=0;
+    int tamannobd=0;
+    char command[30];
+    struct Student *espaciobd;
     
-})
+    do{
+        printf("Ingrese un Comando\n");
+        fscanf(stdin,"%s", command);
+        getc(stdin);
+        if(strncmp("mkdb",command,4)==0){
+            char Nombre[30];
+            fscanf(stdin, "%s", Nombre);
+            fscanf(stdin, "%d",&tamannobd);
+            espaciobd = mkdb(Nombre,tamannobd);
+        }else if(strncmp("mkreg", command, 5) == 0){
+            char Nombre[30];
+            int CC;
+            int Semestre;
+            fscanf(stdin, "%s",Nombre);
+            fscanf(stdin, "%d", &CC);
+            fscanf(stdin, "&d", &Semestre);
+            mkreg(espaciobd, CC, Nombre, Semestre,&contRegistro);
+        }else if(strncmp("savebd", command, 6) == 0){
+            char Nombre[30];
+            fscanf(stdin,"%s",Nombre);
+            FILE *Archivo = fopen(Nombre, "w+");
+            savebd(Archivo, espaciobd,Nombre,tamannobd,contRegistro);
+            fclose(Archivo);
+        }else if(strncmp("loadbd", command, 6) == 0){
+            char Nombre[30];
+            fscanf(stdin,"%s", Nombre);
+            FILE *Archivo = fopen(Nombre, "r");
+            if (Archivo == NULL){
+                perror("Error: ");
+                return EXIT_FAILURE;
+            }
+            espaciobd = loadbd(Archivo,espaciobd,&tamannobd,contRegistro, Nombre);
+            fclose(Archivo);
+        }else if(strncmp("readall",command, 7) == 0){
+            readall(espaciobd,tamannobd);
+        }else if(strncmp("readsize", command, 8)== 0){
+            readsize(espaciobd,tamannobd);
+        }else if(strncmp("readreg",command,7) == 0 ){
+            int CC;
+            fscanf(stdin,"%d", &CC);
+            readreg(espaciobd, tamannobd, CC);
+        }else if(strncmp("ecit",command, 4) == 0 ){
+            int opcion;
+            printf("Desea Guardar la BD?\n1. Guardar Cambios\n2. No Guardar Cambios\n");
+            scanf("%d",&opcion);
+            getc(stdin);
+            if(opcion == 1){
+                char Nombre[30];
+                printf("Ingrese el nombre e}de la bd\n");
+                scanf("%s", Nombre);
+                getc(stdin);
+                FILE *Archivo = fopen(Nombre, "w+");
+                savebd(Archivo, espaciobd, Nombre,tamannobd,contRegistros);
+                fclose(Archivo);
+            }
+            break;
+        }
+    }while(1);
+    free(espaciobd);
+    return 0;
+}
 
