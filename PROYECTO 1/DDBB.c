@@ -86,3 +86,24 @@ void readsize(struct Student *bd, int tamannobd){
     }
 }
 
+void readreg(struct Student *bd, int tamannobd, int CC){
+    int found=0;
+    for(int i=0;i<tamannobd;i++){
+        if((bd + i )->CC==CC){
+            printf("-------------Registro encontrado---------\n");
+            printf("%s\n", (bd + i)->Nombre);
+            printf("%d\n", (bd + i)->CC);
+            printf("%d\n", (bd + i)->Semestre);
+            found = 1;
+            break;
+        }
+    }
+    if(found==0){
+        printf("Registro no encontrado");
+    }
+}
+
+int main(int argc, char const *argv[]{
+    
+})
+
