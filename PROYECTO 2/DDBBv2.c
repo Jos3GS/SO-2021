@@ -219,7 +219,7 @@ int main(int argc, char const *argv[])
             fscanf(stdin, "%d", &semestre);
             // fgets("nan", "%s[^\n]", stdin); //Eliminar argumentos extras.
             mreg(bdAct,nombre,cedula,semestre,&contRegistros);
-            printf("OK registro creado");
+            printf("OK registro creado\n");
         }
         else if (strncmp("svdb", comando, 4) == 0)
         {
