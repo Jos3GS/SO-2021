@@ -37,6 +37,7 @@ void savedb(FILE *archivo2, struct estudiante *Registros, char *nombre, int tama
     {
         fprintf(archivo2, "%s %d %d\n", (Registros + i)->nombre, (Registros + i)->cedula, (Registros + i)->semestre);
     }
+    fclose(archivo2);
 }
 
 void loaddb(FILE *archivo, struct database *espaciobda, struct estudiante *Registros, int *contadorRegistro,int *contDatabase)
