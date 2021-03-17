@@ -1,0 +1,5 @@
+Tamaño: 10
+Nombre | Cedula | Semestre 
+Jose 147 6
+Pepe 258 4
+Andrea 369 2

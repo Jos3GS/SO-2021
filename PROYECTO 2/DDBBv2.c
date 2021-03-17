@@ -8,6 +8,7 @@ typedef struct estudiante
     char nombre[30];
     int semestre;
 } estudiante;
+
 typedef struct database{
     int nroRegistros;
     char nombrebd[30];
@@ -17,7 +18,7 @@ typedef struct database{
 database* mdb(database *BD,char *nombre,int registros, int *cont){
     strcpy((BD+*cont) -> nombrebd,nombre);
     (BD+*cont) -> nroRegistros = registros;
-    (BD+*cont) -> registros = malloc(sizeof (struct estudiante)*(BD+*cont)->nroRegistros);
+    (BD+*cont) -> registros = calloc(sizeof (struct estudiante), (BD+*cont)->nroRegistros);
     (*cont)++;
     return BD;
 }
@@ -37,7 +38,7 @@ void savedb(FILE *archivo2, struct estudiante *Registros, char *nombre, int tama
     {
         fprintf(archivo2, "%s %d %d\n", (Registros + i)->nombre, (Registros + i)->cedula, (Registros + i)->semestre);
     }
-    fclose(archivo2);
+    
 }
 
 void loaddb(FILE *archivo, struct database *espaciobda, struct estudiante *Registros, int *contadorRegistro,int *contDatabase)
@@ -71,13 +72,17 @@ void loaddb(FILE *archivo, struct database *espaciobda, struct estudiante *Regis
     }
     *contadorRegistro = contRegistros;
     rewind(archivo);
+    fscanf(archivo, "%s", LTrash);       //Omitimos la primer palabra
+    fscanf(archivo, "%s", LTrash);     //guardamos el nombre de la BD
+    fscanf(archivo, "%s", LTrash);       //Omitimos la tercer palabra
+    fscanf(archivo, "%d", LTrash);     //guardamos el tamaño de la BD
     fgets(lineaAnt, "%s[^\n]", archivo); //Omitir primera linea.
     fgets(lineaAnt, "%s[^\n]", archivo); //Omitir Segunda linea.
-    fgets(lineaAnt, "%s[^\n]", archivo); //Omitir Tercera linea.
+    //fgets(lineaAnt, "%s[^\n]", archivo); //Omitir Tercera linea.
     //escrituras
     strcpy((espaciobda+*contDatabase)->nombrebd,nombrebd);
     (espaciobda+*contDatabase)->nroRegistros = tamanobd;
-    (espaciobda+*contDatabase)->registros = malloc(sizeof (struct estudiante)*tamanobd);
+    (espaciobda+*contDatabase)->registros = calloc(sizeof (struct estudiante),tamanobd);
     Registros = (espaciobda+*contDatabase)->registros;
     for (int i = 0; i < contRegistros; i++)
     {
@@ -229,7 +234,7 @@ int main(int argc, char const *argv[])
             savedb(archivo2,bdAct,((espaciobases+(contdatabase-1))->nombrebd),((espaciobases+(contdatabase-1))->nroRegistros),contRegistros);
             fclose(archivo2);
         }
-        else if (strncmp("ldb", comando, 3) == 0)
+        else if (strncmp("loaddb", comando, 6) == 0)
         {
 
             char nombre[20];

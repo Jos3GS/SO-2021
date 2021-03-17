@@ -9,8 +9,7 @@ typedef struct Student
     int Semestre;
 };
 
-struct Student *mkdb(char *Nombre, int size)
-{
+struct Student *mkdb(char *Nombre, int size){
     return (struct Student *)malloc(sizeof(struct Student) * size);
 }
 
