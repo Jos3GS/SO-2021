@@ -56,12 +56,12 @@ void loaddb(FILE *archivo, struct database *espaciobda, struct estudiante *Regis
     fscanf(archivo, "%s", nombrebd);     //guardamos el nombre de la BD
     fscanf(archivo, "%s", LTrash);       //Omitimos la tercer palabra
     fscanf(archivo, "%d", &tamanobd);     //guardamos el tamaño de la BD
-    fgets(lineaAnt, "%s[^\n]", archivo); //Omitir primera linea.
-    fgets(lineaAnt, "%s[^\n]", archivo); //Omitir Segunda linea.
-    fgets(lineaAnt, "%s[^\n]", archivo); //Omitir Tercera linea.
+    fgets(lineaAnt, "%[^\n]", archivo); //Omitir primera linea.
+    fgets(lineaAnt, "%[^\n]", archivo); //Omitir Segunda linea.
+    fgets(lineaAnt, "%[^\n]", archivo); //Omitir Tercera linea.
     while (1)
     {
-        fgets(linea, "%s[^\n]", archivo);
+        fgets(linea, "%[^\n]", archivo);
         if (strncmp(lineaAnt, linea, 50) == 0)
         {
             contRegistros++;
